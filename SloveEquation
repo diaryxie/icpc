@@ -1,0 +1,63 @@
+//牛顿迭代法
+#include <iostream>
+
+using namespace std;
+
+double f(double x)
+{
+    return ((x*x + 5)*x - 12)*x - 6;
+}
+
+double df(double x)
+{
+    return (4*x*x + 10)*x - 12;
+}
+
+double newton(double x)
+{
+    double fValue;
+    while (((fValue = f(x)) > 1e-10) || (fValue < -1e-10))
+        x = x - fValue/df(x);
+    return x;
+}
+
+int main()
+{
+    cout << newton(-5);
+
+    cin.get();
+    return 0;
+}
+
+//二分法
+#include <iostream>
+
+using namespace std;
+
+double f(double x)
+{
+    return ((x*x + 5)*x - 12)*x - 6;
+}
+
+double half(double x, double y)
+{
+    double mid, fValue;
+    do {
+        mid = (x + y) / 2;
+        fValue = f(mid);
+        if (fValue * f(x) > 0)
+            x = mid;
+        else
+            y = mid;
+    } while ((fValue > 1e-10) || (fValue < -1e-10));
+
+    return mid;
+}
+
+int main()
+{
+    cout << half(-5, 0);
+
+    cin.get();
+    return 0;
+}
