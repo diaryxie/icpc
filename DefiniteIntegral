@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+
+double f(double x)
+{
+    return ((x*x + 5)*x - 12)*x - 6;
+}
+
+double DefiniteIntegral(double x, double y)
+{
+    double s, h;
+    int i, n = 1000000;
+    h = (y-x)/n;
+    s = 0.5  (f(x) + f(y))  h;
+    for (i = 1; i != n+1; ++i)
+        s += f(x + i*h) * h;
+    return s;
+}
+
+int main()
+{
+    cout << DefiniteIntegral(5, 8);
+
+    cin.get();
+    return 0;
+}
