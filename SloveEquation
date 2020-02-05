@@ -61,3 +61,36 @@ int main()
     cin.get();
     return 0;
 }
+
+//弦截法
+#include <iostream>
+
+using namespace std;
+
+double f(double x)
+{
+    return ((x*x + 5)*x - 12)*x - 6;
+}
+
+double stringCross(double x, double y)
+{
+    double xNew, yNew;
+    do {
+        xNew = (f(x) * y - f(y) * x)/(f(x) - f(y));
+        yNew = f(xNew);
+        if (f(xNew) * yNew > 0)
+            x = xNew;
+        else
+            y = xNew;
+    } while ((yNew > 1e-10) || (yNew < -1e-10));
+
+    return xNew;
+}
+
+int main()
+{
+    cout << stringCross(-2, 0);
+
+    cin.get();
+    return 0;
+}
