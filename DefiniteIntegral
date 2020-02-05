@@ -21,7 +21,6 @@ double DefiniteIntegral(double x, double y)
 int main()
 {
     cout << DefiniteIntegral(5, 8);
-
     cin.get();
     return 0;
 }
