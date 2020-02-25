@@ -2,21 +2,23 @@
 
 char * stcpy ( char * destination, const char * source )
 {
+    char * head = destination;
     while (*destination++ = *source++)
         ;
 
-    return destination;
+    return head;
 }
 
 char * stcat ( char * destination, char * source )
 {
+    char * head = destination;
     while (*destination++)
         ;
     --destination;
     while (*destination++ = *source++)
         ;
 
-    return destination;
+    return head;
 }
 
 size_t stlen ( const char * str )
@@ -24,6 +26,7 @@ size_t stlen ( const char * str )
     int i {0};
     while (str[i++])
         ;
+
     return i-1;
 }
 
@@ -32,6 +35,7 @@ int stcmp ( const char * str1, const char * str2 )
     int i {0};
     while ((str1[i] == str2[i]) && (str2[i]))
         ++i;
+
     return (str1[i] - str2[i]);
 }
 
@@ -41,14 +45,14 @@ char * ststr ( char * str1, const char * str2 )
     char * str1end = str1 + stlen(str1) - stlen(str2) + 1;
     char * str1move = str1;
 
-    while (str1 != str1end)
+    while (str1 < str1end)
     {
         str1move = str1;
         i = 0;
         while ((str1move[i] == str2[i]) && (str2[i]))
             ++i;
 
-        if (*(str2 + i) == '\0')
+        if (str2[i] == '\0')
             return str1;
         ++str1;
     }
@@ -56,13 +60,13 @@ char * ststr ( char * str1, const char * str2 )
     return nullptr;
 }
 
-char * strrrstr ( char * str1, const char * str2 )
+char * srstr ( char * str1, const char * str2 )
 {
     int i {0};
-    char * str1end = str1 + stlen(str1) - stlen(str2) + 1;
+    char * str1end = str1 + stlen(str1) - stlen(str2);
     char * str1move = str1end;
 
-    while (str1 - 1 != str1end)
+    while (str1 - 1 < str1end)
     {
         str1move = str1end;
         i = 0;
@@ -81,10 +85,10 @@ int main()
 {
     char a[100] = "hello!";
     char b[10];
-    stcpy(b, a);
+    printf("%s\n", stcpy(b, a));
     printf("%s\n", b);
 
-    stcat(a, b);
+    printf("%s\n", stcat(a, b));
     printf("%s\n", a);
 
     printf("%d\n", stlen(a));
@@ -92,16 +96,16 @@ int main()
     printf("%d\n", stcmp(a, b));
 
     char aa[] = "nice to meet you";
-    char bb[] = "e";
+    char bb[] = "t";
     if (ststr(aa, bb) == nullptr)
         printf("NULL\n");
     else
         printf("%s\n", ststr(aa, bb));
 
-    if (strrrstr(aa, bb) == nullptr)
+    if (srstr(aa, bb) == nullptr)
         printf("NULL\n");
     else
-        printf("%s\n", strrrstr(aa, bb));
+        printf("%s\n", srstr(aa, bb));
 
     getchar();
     return 0;
